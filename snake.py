@@ -1,12 +1,10 @@
 import streamlit as st
 import random
-import time
 import numpy as np
+import time
 
 # Impostazioni iniziali del gioco
 BOARD_SIZE = 20
-CELL_SIZE = 20
-SNAKE_INIT_LEN = 3
 FPS = 10  # Frame per secondo
 
 # Inizializza lo stato del gioco
@@ -51,24 +49,23 @@ def draw_game(snake, food):
     grid[food[0], food[1]] = 2  # Cibo
     return grid
 
-# Funzione principale del gioco
+# Funzione per la gestione del gioco
 def snake_game():
     snake, direction, food = init_game()
     score = 0
     game_over = False
 
-    # Streamlit component per controllare l'input dell'utente
-    keys = st.radio("Use arrow keys to control the snake:", ('Up', 'Down', 'Left', 'Right'))
+    # Aggiungi un controllo per la direzione
+    key = st.text_input("Direzione (Up, Down, Left, Right):", key="input_dir")
 
-    # Mappa delle direzioni in base alla scelta dell'utente
-    direction_map = {
-        'Up': (-1, 0),
-        'Down': (1, 0),
-        'Left': (0, -1),
-        'Right': (0, 1)
-    }
-    
-    direction = direction_map.get(keys, direction)
+    if key.lower() == 'up':
+        direction = (-1, 0)
+    elif key.lower() == 'down':
+        direction = (1, 0)
+    elif key.lower() == 'left':
+        direction = (0, -1)
+    elif key.lower() == 'right':
+        direction = (0, 1)
 
     # Ciclo di gioco
     while not game_over:
@@ -85,7 +82,7 @@ def snake_game():
         grid = draw_game(snake, food)
 
         st.write(f"Score: {score}")
-        st.image(grid, use_column_width=True)  # Visualizza la griglia del gioco
+        st.write(grid)
 
         time.sleep(1 / FPS)  # Pausa per controllare il frame rate
 
