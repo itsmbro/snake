@@ -1,93 +1,45 @@
 import streamlit as st
-import random
-import numpy as np
-import time
+import openai
 
-# Impostazioni iniziali del gioco
-BOARD_SIZE = 20
-FPS = 10  # Frame per secondo
+# Carica la chiave API dai secrets di Streamlit
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
-# Inizializza lo stato del gioco
-def init_game():
-    snake = [(5, 5), (5, 4), (5, 3)]  # Corpo del serpente (partenza)
-    direction = (0, 1)  # Direzione (destra)
-    food = (random.randint(0, BOARD_SIZE - 1), random.randint(0, BOARD_SIZE - 1))  # Posizione del cibo
-    return snake, direction, food
+# Configura la pagina di Streamlit
+st.set_page_config(page_title="ChatGPT Bot", page_icon="🤖")
 
-# Funzione per aggiornare la posizione del serpente
-def move_snake(snake, direction):
-    head = snake[0]
-    new_head = (head[0] + direction[0], head[1] + direction[1])
-    snake = [new_head] + snake[:-1]
-    return snake
+st.title("🤖 Chat con il bot AI")
 
-# Funzione per gestire la crescita del serpente quando mangia il cibo
-def grow_snake(snake):
-    return [snake[0]] + snake
+# Inizializza la sessione per la cronologia della chat
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-# Funzione per generare una nuova posizione del cibo
-def generate_food(snake):
-    food = (random.randint(0, BOARD_SIZE - 1), random.randint(0, BOARD_SIZE - 1))
-    while food in snake:
-        food = (random.randint(0, BOARD_SIZE - 1), random.randint(0, BOARD_SIZE - 1))
-    return food
+# Mostra la cronologia dei messaggi
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
-# Funzione per verificare se il serpente si è schiantato contro se stesso o i bordi
-def check_collision(snake):
-    head = snake[0]
-    if head in snake[1:]:
-        return True  # Collisione con il corpo
-    if not (0 <= head[0] < BOARD_SIZE and 0 <= head[1] < BOARD_SIZE):
-        return True  # Collisione con i bordi
-    return False
+# Input utente
+if user_input := st.chat_input("Scrivi un messaggio..."):
+    # Mostra il messaggio dell'utente nella chat
+    st.session_state.messages.append({"role": "user", "content": user_input})
+    with st.chat_message("user"):
+        st.markdown(user_input)
 
-# Funzione per disegnare il gioco
-def draw_game(snake, food):
-    grid = np.zeros((BOARD_SIZE, BOARD_SIZE), dtype=int)
-    for segment in snake:
-        grid[segment[0], segment[1]] = 1  # Corpo del serpente
-    grid[food[0], food[1]] = 2  # Cibo
-    return grid
+    # Richiesta all'API di OpenAI
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4",  # Usa "gpt-3.5-turbo" se preferisci
+            messages=[{"role": msg["role"], "content": msg["content"]} for msg in st.session_state.messages],
+            temperature=0.7
+        )
+        bot_response = response["choices"][0]["message"]["content"]
 
-# Funzione per la gestione del gioco
-def snake_game():
-    snake, direction, food = init_game()
-    score = 0
-    game_over = False
+        # Mostra la risposta del bot nella chat
+        with st.chat_message("assistant"):
+            st.markdown(bot_response)
 
-    # Aggiungi un controllo per la direzione
-    key = st.text_input("Direzione (Up, Down, Left, Right):", key="input_dir")
+        # Salva il messaggio del bot nella sessione
+        st.session_state.messages.append({"role": "assistant", "content": bot_response})
 
-    if key.lower() == 'up':
-        direction = (-1, 0)
-    elif key.lower() == 'down':
-        direction = (1, 0)
-    elif key.lower() == 'left':
-        direction = (0, -1)
-    elif key.lower() == 'right':
-        direction = (0, 1)
-
-    # Ciclo di gioco
-    while not game_over:
-        snake = move_snake(snake, direction)
-
-        if snake[0] == food:
-            food = generate_food(snake)  # Genera nuovo cibo
-            snake = grow_snake(snake)  # Cresce il serpente
-            score += 1
-
-        game_over = check_collision(snake)  # Verifica se il gioco è finito
-
-        # Disegna la griglia del gioco
-        grid = draw_game(snake, food)
-
-        st.write(f"Score: {score}")
-        st.write(grid)
-
-        time.sleep(1 / FPS)  # Pausa per controllare il frame rate
-
-    st.write("Game Over!")
-
-# Avvio del gioco
-if __name__ == '__main__':
-    snake_game()
+    except Exception as e:
+        st.error(f"Errore nella comunicazione con l'API: {str(e)}")
