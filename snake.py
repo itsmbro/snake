@@ -143,7 +143,7 @@ if user_input := st.chat_input("Parlami di te..."):
             st.markdown(updated_response)
 
         # Aggiunge il messaggio del bot alla sessione
-        st.session_state.messages.append({"role": "assistant", "content": response})
+        st.session_state.messages.append({"role": "assistant", "content": updated_response})
 
     except Exception as e:
         st.error(f"Errore nella comunicazione con l'API: {str(e)}")
