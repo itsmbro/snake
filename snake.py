@@ -5,7 +5,7 @@ from base64 import b64encode
 
 # Funzione per caricare il file JSON da GitHub
 def load_user_info_from_github():
-    url = "https://raw.githubusercontent.com/USER/REPO/BRANCH/user_data.json"  # Modifica USER, REPO e BRANCH
+    url = "https://raw.githubusercontent.com/itsmbro/snake/main/user_data.json"  # Modifica USER, REPO e BRANCH
     response = requests.get(url)
     
     if response.status_code == 200:
