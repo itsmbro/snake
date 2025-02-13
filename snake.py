@@ -8,26 +8,24 @@ import re
 
 
 
-# Controllo password
-def check_password():
-    """Richiede la password prima di accedere alla web app."""
-    if "authenticated" not in st.session_state:
-        st.session_state.authenticated = False
+# Inizializza la variabile di autenticazione nella sessione
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
 
-    if not st.session_state.authenticated:
-        password = st.text_input("Inserisci la password:", type="password")
-
-        if password:
-            if password == st.secrets["PASS"]:
-                st.session_state.authenticated = True
-                st.experimental_rerun()  # Ricarica l'app per applicare l'autenticazione
-            else:
-                st.error("Password errata!")
-
-        st.stop()  # Blocca l'esecuzione fino a che la password non è corretta
-
-# Qui chiamiamo la funzione per verificare la password
-check_password()
+# UI per l'inserimento della password se l'utente non è autenticato
+if not st.session_state.authenticated:
+    st.title("🔒 Accesso richiesto")
+    password = st.text_input("Inserisci la password:", type="password")
+    if st.button("Accedi"):
+        if password == st.secrets["PASS"]:
+            st.session_state.authenticated = True  # Salva lo stato di autenticazione
+            st.success("Accesso riuscito! Ora puoi usare il chatbot.")
+        else:
+            st.error("Password errata! Riprova.")
+else:
+    # Se l'utente è autenticato, mostra il chatbot
+    st.title("🧠 Chat con il tuo Psicologo AI")
+    st.write("Benvenuto nella chat! Ora puoi interagire con il bot.")
 
 # Se l'autenticazione è riuscita, l'app continua normalmente
 st.write("Accesso riuscito! Benvenuto nella tua web app.")
