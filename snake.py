@@ -13,14 +13,19 @@ def check_password():
 
     if not st.session_state.authenticated:
         password = st.text_input("Inserisci la password:", type="password")
-        if password == st.secrets["PASS"]:
-            st.session_state.authenticated = True
-            st.experimental_rerun()
-        else:
-            st.error("Password errata!")
-            st.stop()  # Blocca l'esecuzione del resto dell'app
+
+        # Verifica solo se l'utente ha digitato qualcosa
+        if password:
+            if password == st.secrets["PASS"]:
+                st.session_state.authenticated = True
+                st.experimental_rerun()
+            else:
+                st.error("Password errata!")
+
+        st.stop()  # Blocca l'esecuzione finché la password non è corretta
 
 check_password()
+
 
 
 # Configurazione delle API
