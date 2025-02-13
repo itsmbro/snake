@@ -23,11 +23,11 @@ def load_user_info():
         # Se non trova il file, crea un file di base
         user_info = {
             "nome": "Michele",
-            "cognome": "Rossi",
-            "anno_di_nascita": 1997,
+            "cognome": "Belotti",
+            "anno_di_nascita": 1998,
             "sesso": "Maschio",
-            "interessi": [],
-            "note_psicologiche": []
+            "interessi": ["suono il piamo"],
+            "note_psicologiche": ["nessuna"]
         }
         update_user_info_on_github(user_info)
         return user_info
