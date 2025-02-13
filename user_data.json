@@ -1,8 +1,8 @@
 {
     "nome": "Michele",
-    "cognome": "Rossi",
+    "cognome": "Belotti",
     "anno_di_nascita": 1998,
     "sesso": "Maschio",
-    "interessi": ["pianofortr", "tecnologia"],
+    "interessi": ["pianoforte", "tecnologia"],
     "note_psicologiche": ["un anno di psicoterapia lavoro sull'internal family system", "ansia da abbandono", "fidanzato con martina"]
 }
