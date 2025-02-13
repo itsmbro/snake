@@ -1,115 +1,114 @@
-import streamlit as st
-import openai
 import json
-import os
-import re
+import requests
+import streamlit as st
+from base64 import b64encode
 
-# Carica la chiave API dai secrets di Streamlit
-openai.api_key = st.secrets["OPENAI_API_KEY"]
-
-# Percorso del file JSON con le informazioni personali
-USER_INFO_FILE = "user_info.json"
-
-# Funzione per caricare le informazioni utente
-def load_user_info():
-    if os.path.exists(USER_INFO_FILE):
-        with open(USER_INFO_FILE, "r", encoding="utf-8") as file:
-            return json.load(file)
+# Funzione per caricare il file JSON da GitHub
+def load_user_info_from_github():
+    url = "https://raw.githubusercontent.com/USER/REPO/BRANCH/user_data.json"  # Modifica USER, REPO e BRANCH
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        return response.json()
     else:
-        # Creiamo un file di base se non esiste
-        user_info = {
+        # Se il file non esiste, ritorniamo dati predefiniti
+        default_data = {
             "nome": "Michele",
-            "cognome": "Belotti",
+            "cognome": "Rossi",
             "anno_di_nascita": 1998,
             "sesso": "Maschio",
-            "interessi": ["pianoforte", "musica", "scrivo canzoni"],
-            "note_psicologiche": ["un anno di psicoterapia lavoro su internal family system", "ansia da abbandono"]
+            "interessi": [],
+            "note_psicologiche": []
         }
-        save_user_info(user_info)
-        return user_info
+        return default_data
 
-# Funzione per salvare le informazioni utente
-def save_user_info(user_info):
-    with open(USER_INFO_FILE, "w", encoding="utf-8") as file:
-        json.dump(user_info, file, ensure_ascii=False, indent=4)
+# Funzione per aggiornare il file JSON su GitHub
+def update_user_info_on_github(new_data):
+    url = "https://api.github.com/repos/USER/REPO/contents/user_data.json"  # Modifica USER e REPO
+    github_token = "your_github_token"  # Se repository privato
+    headers = {"Authorization": f"token {github_token}"}
 
-# Funzione per generare il prompt iniziale con il contesto
-def generate_initial_prompt(user_info):
-    return (
-        "Sei il mio psicologo personale. Devi conoscermi e aiutarmi nel modo migliore possibile.\n"
-        "Gestiamo un file JSON in Python che contiene le mie informazioni personali.\n"
-        "Il JSON attuale con le mie informazioni è il seguente:\n\n"
-        "00000000\n"
-        f"{json.dumps(user_info, ensure_ascii=False, indent=4)}\n"
-        "00000000\n\n"
-        "Puoi aggiornarlo quando ritieni utile aggiungere dettagli importanti su di me.\n"
-        "Quando vuoi aggiornare il file JSON, devi farlo seguendo questo formato ESATTO:\n\n"
-        "00000000\n"
-        "{\n"
-        '  "chiave1": "valore1",\n'
-        '  "chiave2": "valore2"\n'
-        "}\n"
-        "00000000\n\n"
-        "Il JSON deve essere ben formato e contenere solo nuove informazioni pertinenti.\n"
-        "Non modificare o rimuovere dati esistenti, ma solo aggiungere nuove informazioni se necessario.\n"
-        "Ora iniziamo a parlare!"
-    )
-# Funzione per aggiornare il file JSON dalle risposte di ChatGPT
-def update_user_info_from_response(response_text, user_info):
-    match = re.search(r'00000000\n(.*?)\n00000000', response_text, re.DOTALL)
-    if match:
-        try:
-            new_data = json.loads(match.group(1))
-            user_info.update(new_data)
-            save_user_info(user_info)
-            return response_text.replace(match.group(0), "").strip()  # Rimuove la parte JSON dalla risposta
-        except json.JSONDecodeError:
-            pass  # Se il formato non è corretto, ignoriamo l'aggiornamento
-    return response_text
+    # Ottieni l'hash del file per fare l'update
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        file_data = response.json()
+        sha = file_data["sha"]  # Ottieni l'hash del file per fare il commit
+    else:
+        sha = None
 
-# Carichiamo le informazioni utente
-user_info = load_user_info()
-initial_prompt = generate_initial_prompt(user_info)
+    # Codifica i dati come stringa JSON in base64
+    json_data = json.dumps(new_data, ensure_ascii=False, indent=4)
+    encoded_data = b64encode(json_data.encode('utf-8')).decode('utf-8')
 
-# Inizializza la sessione
-if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "system", "content": initial_prompt}]
+    data = {
+        "message": "Aggiornamento delle informazioni utente",
+        "content": encoded_data,
+        "branch": "main"
+    }
 
-# Configura la pagina di Streamlit
-st.set_page_config(page_title="Chat Psicologo AI", page_icon="🧠")
+    if sha:
+        data["sha"] = sha  # Aggiungi l'hash per fare il commit sull'esistente
 
-st.title("🧠 Chat con il tuo Psicologo AI")
+    response = requests.put(url, json=data, headers=headers)
+    
+    if response.status_code == 200:
+        print("File JSON aggiornato con successo!")
+    else:
+        print(f"Errore nell'aggiornamento del file: {response.status_code}")
 
-# Mostra la cronologia dei messaggi
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+# Funzione per eliminare il file JSON da GitHub
+def delete_json_from_github():
+    url = "https://api.github.com/repos/USER/REPO/contents/user_data.json"  # Modifica USER e REPO
+    github_token = "your_github_token"  # Se repository privato
+    headers = {"Authorization": f"token {github_token}"}
 
-# Input utente
-if user_input := st.chat_input("Parlami di te..."):
-    # Mostra il messaggio dell'utente nella chat
-    st.session_state.messages.append({"role": "user", "content": user_input})
-    with st.chat_message("user"):
-        st.markdown(user_input)
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        file_data = response.json()
+        sha = file_data["sha"]  # Ottieni l'hash del file per il DELETE
 
-    # Richiesta a ChatGPT
-    try:
-        response = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=st.session_state.messages,
-            temperature=0.7
-        )
-        bot_response = response["choices"][0]["message"]["content"]
+        # Fai una richiesta DELETE per eliminare il file
+        delete_url = f"https://api.github.com/repos/USER/REPO/contents/user_data.json"
+        data = {
+            "message": "Eliminazione del file JSON",
+            "sha": sha,
+            "branch": "main"
+        }
 
-        # Analizziamo la risposta per vedere se ci sono aggiornamenti JSON
-        updated_response = update_user_info_from_response(bot_response, user_info)
+        delete_response = requests.delete(delete_url, json=data, headers=headers)
+        if delete_response.status_code == 200:
+            print("File JSON eliminato su GitHub con successo.")
+        else:
+            print(f"Errore nell'eliminazione del file: {delete_response.status_code}")
+    else:
+        print(f"Errore nell'ottenere il file da GitHub: {response.status_code}")
 
-        # Mostra la risposta del bot nella chat
-        with st.chat_message("assistant"):
-            st.markdown(updated_response)
+# Funzione principale per l'app Streamlit
+def main():
+    st.title("Chat con il bot psicologo")
 
-        # Aggiunge il messaggio del bot alla sessione
-        st.session_state.messages.append({"role": "assistant", "content": updated_response})
+    # Carica il JSON da GitHub
+    user_info = load_user_info_from_github()
 
-    except Exception as e:
-        st.error(f"Errore nella comunicazione con l'API: {str(e)}")
+    # Visualizza le informazioni
+    st.write("Benvenuto! Queste sono le tue informazioni di base:", user_info)
+
+    # Mostra un campo di testo per interagire con il bot
+    user_message = st.text_input("Scrivi qualcosa al tuo psicologo:")
+
+    if user_message:
+        # Logica per rispondere, e aggiornare il JSON se necessario
+        # Simula un messaggio del bot che aggiunge una nuova informazione (esempio)
+        if "cane" in user_message.lower():
+            user_info["note_psicologiche"].append("Possiede un cane.")
+            update_user_info_on_github(user_info)
+
+        # Risposta del bot
+        st.write("Bot: Ho aggiunto una nuova informazione sulla tua conversazione.")
+
+    # Pulsante per eliminare il JSON (per il caso in cui desideri eliminare il file)
+    if st.button("Elimina il file JSON su GitHub"):
+        delete_json_from_github()
+
+if __name__ == "__main__":
+    main()
