@@ -18,13 +18,15 @@ def check_password():
         if password:
             if password == st.secrets["PASS"]:
                 st.session_state.authenticated = True
-                st.experimental_rerun()
+                st.success("Accesso riuscito! Ricarica la pagina se necessario.")
+                st.stop()  # Blocca l'esecuzione per evitare problemi
             else:
                 st.error("Password errata!")
 
         st.stop()  # Blocca l'esecuzione finché la password non è corretta
 
 check_password()
+
 
 
 
