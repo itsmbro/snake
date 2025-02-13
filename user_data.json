@@ -3,6 +3,18 @@
     "cognome": "Belotti",
     "anno_di_nascita": 1998,
     "sesso": "Maschio",
-    "interessi": ["pianoforte", "tecnologia"],
-    "note_psicologiche": ["un anno di psicoterapia lavoro sull'internal family system", "ansia da abbandono", "fidanzato con martina"]
+    "interessi": [
+        "pianoforte",
+        "tecnologia"
+    ],
+    "note_psicologiche": [
+        "un anno di psicoterapia lavoro sull'internal family system",
+        "ansia da abbandono",
+        "fidanzato con martina"
+    ],
+    "animale_domestico": {
+        "tipo": "Cane",
+        "nome": "Aaron"
+    },
+    "emotivo": true
 }
