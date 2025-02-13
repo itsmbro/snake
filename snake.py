@@ -11,7 +11,7 @@ openai.api_key = st.secrets["OPENAI_API_KEY"]
 GITHUB_USER = "itsmbro"
 GITHUB_REPO = "snake"
 GITHUB_BRANCH = "main"
-USER_INFO_FILE = "user_info.json"  # Il file è presente nel repository GitHub
+USER_INFO_FILE = "user_data.json"  # Il file è presente nel repository GitHub
 
 # Funzione per caricare le informazioni utente da GitHub
 def load_user_info():
