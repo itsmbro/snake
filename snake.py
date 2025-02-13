@@ -5,10 +5,30 @@ import requests
 import base64
 import re
 
+# Configurazione della password
+PASSWORD = st.secrets["PASS"]  # Definisci la password nei secrets di Streamlit
 
+# Inizializza la sessione
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
 
+# Funzione di autenticazione
+def authenticate():
+    if st.session_state["password_input"] == PASSWORD:
+        st.session_state.authenticated = True
+        st.session_state.pop("password_input")  # Rimuove la password dalla memoria dopo il login
+    else:
+        st.error("Password errata. Riprova.")
 
+# Se l'utente non è autenticato, mostra il login
+if not st.session_state.authenticated:
+    st.title("🔒 Accesso richiesto")
+    st.text_input("Inserisci la password:", type="password", key="password_input")
+    st.button("Accedi", on_click=authenticate)
+    st.stop()  # Interrompe l'esecuzione finché non viene autenticato
 
+# Se l'utente è autenticato, mostra l'app
+st.title("🧠 Chat con il tuo Psicologo AI")
 
 # Configurazione delle API
 openai.api_key = st.secrets["OPENAI_API_KEY"]
@@ -46,18 +66,12 @@ def save_user_info(user_info):
         "Accept": "application/vnd.github.v3+json"
     }
 
-    # Ottieni SHA del file per aggiornamento
     response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        sha = response.json()["sha"]
-    else:
-        sha = None  # Il file sarà creato da zero
+    sha = response.json().get("sha") if response.status_code == 200 else None
 
-    # Converte il JSON in base64
     json_data = json.dumps(user_info, ensure_ascii=False, indent=4)
     json_base64 = base64.b64encode(json_data.encode()).decode()
 
-    # Prepara la richiesta
     data = {
         "message": "Aggiornamento user_data.json",
         "content": json_base64,
@@ -65,7 +79,7 @@ def save_user_info(user_info):
     }
     
     if sha:
-        data["sha"] = sha  # Necessario per l'aggiornamento
+        data["sha"] = sha  
 
     response = requests.put(url, headers=headers, json=data)
     if response.status_code not in [200, 201]:
@@ -100,23 +114,19 @@ def update_user_info_from_response(response_text, user_info):
         try:
             new_data = json.loads(match.group(1))
             user_info.update(new_data)
-            save_user_info(user_info)  # Salva su GitHub
+            save_user_info(user_info)
             return response_text.replace(match.group(0), "").strip()
         except json.JSONDecodeError:
-            pass  # Ignora errori di parsing JSON
+            pass  
     return response_text
 
 # Carichiamo il JSON da GitHub
 user_info = load_user_info()
 initial_prompt = generate_initial_prompt(user_info)
 
-# Inizializza la sessione
+# Inizializza la sessione della chat
 if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "system", "content": initial_prompt}]
-
-# Configura la pagina di Streamlit
-st.set_page_config(page_title="Chat Psicologo AI", page_icon="🧠")
-st.title("🧠 Chat con il tuo Psicologo AI")
 
 # Mostra la cronologia dei messaggi
 for message in st.session_state.messages:
