@@ -1,0 +1,8 @@
+{
+    "nome": "Michele",
+    "cognome": "Rossi",
+    "anno_di_nascita": 1998,
+    "sesso": "Maschio",
+    "interessi": ["pianofortr", "tecnologia"],
+    "note_psicologiche": ["un anno di psicoterapia lavoro sull'internal family system", "ansia da abbandono", "fidanzato con martina"]
+}
