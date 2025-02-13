@@ -54,7 +54,7 @@ def save_user_info(user_info):
 
     # Prepara la richiesta
     data = {
-        "message": "Aggiornamento user_info.json",
+        "message": "Aggiornamento user_data.json",
         "content": json_base64,
         "branch": GITHUB_BRANCH
     }
