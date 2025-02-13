@@ -19,11 +19,11 @@ def load_user_info():
         # Creiamo un file di base se non esiste
         user_info = {
             "nome": "Michele",
-            "cognome": "Rossi",
-            "anno_di_nascita": 1997,
+            "cognome": "Belotti",
+            "anno_di_nascita": 1998,
             "sesso": "Maschio",
-            "interessi": [],
-            "note_psicologiche": []
+            "interessi": ["pianoforte", "musica", "scrivo canzoni"],
+            "note_psicologiche": ["un anno di psicoterapia lavoro su internal family system", "ansia da abbandono"]
         }
         save_user_info(user_info)
         return user_info
@@ -37,21 +37,23 @@ def save_user_info(user_info):
 def generate_initial_prompt(user_info):
     return (
         "Sei il mio psicologo personale. Devi conoscermi e aiutarmi nel modo migliore possibile.\n"
-        "Ecco alcune informazioni su di me:\n"
-        f"- Nome: {user_info['nome']}\n"
-        f"- Cognome: {user_info['cognome']}\n"
-        f"- Anno di nascita: {user_info['anno_di_nascita']}\n"
-        f"- Sesso: {user_info['sesso']}\n"
-        f"- Interessi: {', '.join(user_info['interessi']) if user_info['interessi'] else 'Nessuno'}\n"
-        f"- Note psicologiche: {', '.join(user_info['note_psicologiche']) if user_info['note_psicologiche'] else 'Nessuna'}\n"
-        "Puoi aggiornare le mie informazioni se lo ritieni utile.\n"
-        "Quando vuoi aggiungere qualcosa nel file, usa questo formato:\n"
+        "Gestiamo un file JSON in Python che contiene le mie informazioni personali.\n"
+        "Il JSON attuale con le mie informazioni è il seguente:\n\n"
         "00000000\n"
-        "Parte di JSON da aggiornare\n"
+        f"{json.dumps(user_info, ensure_ascii=False, indent=4)}\n"
+        "00000000\n\n"
+        "Puoi aggiornarlo quando ritieni utile aggiungere dettagli importanti su di me.\n"
+        "Quando vuoi aggiornare il file JSON, devi farlo seguendo questo formato ESATTO:\n\n"
         "00000000\n"
+        "{\n"
+        '  "chiave1": "valore1",\n'
+        '  "chiave2": "valore2"\n'
+        "}\n"
+        "00000000\n\n"
+        "Il JSON deve essere ben formato e contenere solo nuove informazioni pertinenti.\n"
+        "Non modificare o rimuovere dati esistenti, ma solo aggiungere nuove informazioni se necessario.\n"
         "Ora iniziamo a parlare!"
     )
-
 # Funzione per aggiornare il file JSON dalle risposte di ChatGPT
 def update_user_info_from_response(response_text, user_info):
     match = re.search(r'00000000\n(.*?)\n00000000', response_text, re.DOTALL)
