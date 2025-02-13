@@ -6,6 +6,8 @@ import base64
 import re
 
 
+
+
 # Controllo password
 def check_password():
     """Richiede la password prima di accedere alla web app."""
@@ -18,13 +20,17 @@ def check_password():
         if password:
             if password == st.secrets["PASS"]:
                 st.session_state.authenticated = True
-                st.experimental_rerun()  # Ricarica automaticamente l'app
+                st.experimental_rerun()  # Ricarica l'app per applicare l'autenticazione
             else:
                 st.error("Password errata!")
 
-        st.stop()  # Blocca l'esecuzione finché la password non è corretta
+        st.stop()  # Blocca l'esecuzione fino a che la password non è corretta
 
+# Qui chiamiamo la funzione per verificare la password
 check_password()
+
+# Se l'autenticazione è riuscita, l'app continua normalmente
+st.write("Accesso riuscito! Benvenuto nella tua web app.")
 
 
 
