@@ -40,5 +40,25 @@
             "Creazione di un ambiente sicuro e di supporto"
         ],
         "impegno_del_paziente": "Partecipazione attiva e volontà di cambiare"
-    }
+    },
+    "pensieri_correnti": "Preoccupazione che la ragazza possa evitare o rifiutare, soprattutto quando non possono incontrarsi di persona",
+    "emozioni_correnti": [
+        "frustrazione",
+        "rabbia",
+        "paura",
+        "timore",
+        "senso di abbandono"
+    ],
+    "comportamenti_reattivi": [
+        "Ritiro emotivo",
+        "Incolpare la fidanzata"
+    ],
+    "obiettivi_terapia_aggiuntivi": [
+        "Gestione della paura dell'abbandono",
+        "Sviluppo dell'indipendenza emotiva"
+    ],
+    "strategie_terapeutiche_aggiuntive": [
+        "Mindfulness per la riduzione dell'ansia e interruzione del ciclo di pensieri negativi",
+        "Sviluppo di competenze di comunicazione assertiva"
+    ]
 }
