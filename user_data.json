@@ -24,5 +24,7 @@
         "Comunicazione aperta con la partner",
         "Tecniche di rilassamento",
         "Terapia cognitivo-comportamentale"
-    ]
+    ],
+    "trattamento_corrente": "Terapia Cognitivo-Comportamentale",
+    "pensieri_ricorrenti": "Preoccupazioni riguardanti la fidanzata, che possa evitare o nascondere qualcosa"
 }
