@@ -2,71 +2,71 @@ import streamlit as st
 import openai
 import json
 import requests
+import base64
 import re
 
-# Carica la chiave API dai secrets di Streamlit
+# Configurazione delle API
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
-# URL del file JSON su GitHub
+# Configurazione GitHub
 GITHUB_USER = "itsmbro"
 GITHUB_REPO = "snake"
 GITHUB_BRANCH = "main"
-USER_INFO_FILE = "user_data.json"  # Il file è presente nel repository GitHub
+GITHUB_FILE_PATH = "user_data.json"
 
-# Funzione per caricare le informazioni utente da GitHub
+# Funzione per caricare user_info.json da GitHub
 def load_user_info():
-    url = f"https://raw.githubusercontent.com/{GITHUB_USER}/{GITHUB_REPO}/{GITHUB_BRANCH}/{USER_INFO_FILE}"
+    url = f"https://raw.githubusercontent.com/{GITHUB_USER}/{GITHUB_REPO}/{GITHUB_BRANCH}/{GITHUB_FILE_PATH}"
     response = requests.get(url)
+
     if response.status_code == 200:
         return response.json()
     else:
-        # Se non trova il file, crea un file di base
         user_info = {
             "nome": "Michele",
-            "cognome": "Belotti",
-            "anno_di_nascita": 1998,
+            "cognome": "Rossi",
+            "anno_di_nascita": 1997,
             "sesso": "Maschio",
-            "interessi": ["suono il piamo"],
-            "note_psicologiche": ["nessuna"]
+            "interessi": [],
+            "note_psicologiche": []
         }
-        update_user_info_on_github(user_info)
+        save_user_info(user_info)
         return user_info
 
-# Funzione per aggiornare il file JSON su GitHub
-def update_user_info_on_github(user_info):
-    url = f"https://api.github.com/repos/{GITHUB_USER}/{GITHUB_REPO}/contents/{USER_INFO_FILE}"
-    github_token = st.secrets["GITHUB_TOKEN"]  # Token GitHub nei secrets di Streamlit
-    headers = {"Authorization": f"token {github_token}"}
-
-    # Ottieni l'hash del file per fare l'update
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        file_data = response.json()
-        sha = file_data["sha"]  # Ottieni l'hash del file
-    else:
-        sha = None
-
-    # Codifica i dati come stringa JSON in base64
-    json_data = json.dumps(user_info, ensure_ascii=False, indent=4)
-    encoded_data = json_data.encode('utf-8').decode('utf-8')
-
-    data = {
-        "message": "Aggiornamento delle informazioni utente",
-        "content": encoded_data,
-        "branch": GITHUB_BRANCH
+# Funzione per salvare user_info.json su GitHub
+def save_user_info(user_info):
+    url = f"https://api.github.com/repos/{GITHUB_USER}/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
+    headers = {
+        "Authorization": f"token {st.secrets['GITHUB_TOKEN']}",
+        "Accept": "application/vnd.github.v3+json"
     }
 
-    if sha:
-        data["sha"] = sha  # Aggiungi l'hash per fare il commit sull'esistente
-
-    response = requests.put(url, json=data, headers=headers)
-    
+    # Ottieni SHA del file per aggiornamento
+    response = requests.get(url, headers=headers)
     if response.status_code == 200:
-        print("File JSON aggiornato su GitHub con successo!")
+        sha = response.json()["sha"]
     else:
-        print(f"Errore nell'aggiornamento del file su GitHub: {response.status_code}")
+        sha = None  # Il file sarà creato da zero
 
-# Funzione per generare il prompt iniziale con il contesto
+    # Converte il JSON in base64
+    json_data = json.dumps(user_info, ensure_ascii=False, indent=4)
+    json_base64 = base64.b64encode(json_data.encode()).decode()
+
+    # Prepara la richiesta
+    data = {
+        "message": "Aggiornamento user_info.json",
+        "content": json_base64,
+        "branch": GITHUB_BRANCH
+    }
+    
+    if sha:
+        data["sha"] = sha  # Necessario per l'aggiornamento
+
+    response = requests.put(url, headers=headers, json=data)
+    if response.status_code not in [200, 201]:
+        st.error(f"Errore aggiornamento GitHub: {response.json()}")
+
+# Genera il prompt iniziale con il contesto
 def generate_initial_prompt(user_info):
     return (
         "Sei il mio psicologo personale. Devi conoscermi e aiutarmi nel modo migliore possibile.\n"
@@ -88,20 +88,20 @@ def generate_initial_prompt(user_info):
         "Ora iniziamo a parlare!"
     )
 
-# Funzione per aggiornare il file JSON dalle risposte di ChatGPT
+# Funzione per aggiornare user_info.json dalle risposte di ChatGPT
 def update_user_info_from_response(response_text, user_info):
     match = re.search(r'00000000\n(.*?)\n00000000', response_text, re.DOTALL)
     if match:
         try:
             new_data = json.loads(match.group(1))
             user_info.update(new_data)
-            update_user_info_on_github(user_info)  # Aggiorna il file su GitHub
-            return response_text.replace(match.group(0), "").strip()  # Rimuove la parte JSON dalla risposta
+            save_user_info(user_info)  # Salva su GitHub
+            return response_text.replace(match.group(0), "").strip()
         except json.JSONDecodeError:
-            pass  # Se il formato non è corretto, ignoriamo l'aggiornamento
+            pass  # Ignora errori di parsing JSON
     return response_text
 
-# Carichiamo le informazioni utente
+# Carichiamo il JSON da GitHub
 user_info = load_user_info()
 initial_prompt = generate_initial_prompt(user_info)
 
@@ -111,7 +111,6 @@ if "messages" not in st.session_state:
 
 # Configura la pagina di Streamlit
 st.set_page_config(page_title="Chat Psicologo AI", page_icon="🧠")
-
 st.title("🧠 Chat con il tuo Psicologo AI")
 
 # Mostra la cronologia dei messaggi
@@ -121,7 +120,6 @@ for message in st.session_state.messages:
 
 # Input utente
 if user_input := st.chat_input("Parlami di te..."):
-    # Mostra il messaggio dell'utente nella chat
     st.session_state.messages.append({"role": "user", "content": user_input})
     with st.chat_message("user"):
         st.markdown(user_input)
@@ -135,15 +133,15 @@ if user_input := st.chat_input("Parlami di te..."):
         )
         bot_response = response["choices"][0]["message"]["content"]
 
-        # Analizziamo la risposta per vedere se ci sono aggiornamenti JSON
+        # Aggiorna user_info.json se necessario
         updated_response = update_user_info_from_response(bot_response, user_info)
 
-        # Mostra la risposta del bot nella chat
+        # Mostra la risposta nella chat
         with st.chat_message("assistant"):
             st.markdown(updated_response)
 
-        # Aggiunge il messaggio del bot alla sessione
+        # Salva il messaggio nella sessione
         st.session_state.messages.append({"role": "assistant", "content": updated_response})
 
     except Exception as e:
-        st.error(f"Errore nella comunicazione con l'API: {str(e)}")
+        st.error(f"Errore nella comunicazione con OpenAI: {str(e)}")
