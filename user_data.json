@@ -25,5 +25,20 @@
         "Terapia cognitivo-comportamentale"
     ],
     "trattamento_corrente": "Terapia Cognitivo-Comportamentale",
-    "pensieri_ricorrenti": "Preoccupazioni riguardanti la fidanzata, che possa evitare o nascondere qualcosa"
+    "pensieri_ricorrenti": "Preoccupazioni riguardanti la fidanzata, che possa evitare o nascondere qualcosa",
+    "psicoterapeuta": "AI",
+    "piano_terapeutico": {
+        "obiettivi_terapia": [
+            "Gestione dell'ansia riguardo la relazione con la fidanzata",
+            "Preparazione al potenziale cambiamento di vita (convivenza con la fidanzata)",
+            "Comprensione ed espressione efficace dell'emotività",
+            "Gestione dei pensieri ricorrenti"
+        ],
+        "strategie_terapeutiche": [
+            "Esplorazione dei pensieri ricorrenti e comprensione delle loro cause",
+            "Integrazione di tecniche di rilassamento o meditazione",
+            "Creazione di un ambiente sicuro e di supporto"
+        ],
+        "impegno_del_paziente": "Partecipazione attiva e volontà di cambiare"
+    }
 }
