@@ -54,11 +54,12 @@
         "Incolpare la fidanzata"
     ],
     "obiettivi_terapia_aggiuntivi": [
-        "Gestione della paura dell'abbandono",
-        "Sviluppo dell'indipendenza emotiva"
+        "Gestione delle reazioni emotive",
+        "Superare le paure di rifiuto e abbandono"
     ],
     "strategie_terapeutiche_aggiuntive": [
-        "Mindfulness per la riduzione dell'ansia e interruzione del ciclo di pensieri negativi",
         "Sviluppo di competenze di comunicazione assertiva"
-    ]
+    ],
+    "ciclo_pensieri_negativi": "Si verifica quando la fidanzata non risponde per un periodo di tempo, portando a pensieri di rifiuto o abbandono",
+    "reazioni_emozionali": "Desiderio di causare lo stesso dolore alla fidanzata non rispondendo o sottolineando i suoi errori"
 }
