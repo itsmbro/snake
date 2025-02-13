@@ -5,6 +5,24 @@ import requests
 import base64
 import re
 
+# Controllo password
+def check_password():
+    """Richiede la password prima di accedere alla web app."""
+    if "authenticated" not in st.session_state:
+        st.session_state.authenticated = False
+
+    if not st.session_state.authenticated:
+        password = st.text_input("Inserisci la password:", type="password")
+        if password == st.secrets["PASS"]:
+            st.session_state.authenticated = True
+            st.experimental_rerun()
+        else:
+            st.error("Password errata!")
+            st.stop()  # Blocca l'esecuzione del resto dell'app
+
+check_password()
+
+
 # Configurazione delle API
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
