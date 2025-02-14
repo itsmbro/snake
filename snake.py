@@ -9,8 +9,7 @@ from visualizza_json import visualizza_json
 
 
 # Aggiungi una voce nel menu per visualizzare il JSON
-if st.button("Visualizza JSON"):
-    visualizza_json(user_info)
+
 
 
 # Configurazione della password
@@ -131,6 +130,8 @@ def update_user_info_from_response(response_text, user_info):
 # Carichiamo il JSON da GitHub
 user_info = load_user_info()
 initial_prompt = generate_initial_prompt(user_info)
+if st.button("Visualizza JSON"):
+    visualizza_json(user_info)
 
 # Inizializza la sessione della chat
 if "messages" not in st.session_state:
