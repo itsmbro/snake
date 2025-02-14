@@ -77,5 +77,11 @@
             "descrizione": "La parte più vulnerabile, ha paura di essere rifiutata o abbandonata. Protegge la Parte Bambino",
             "relazioni": "Viene giudicata dalla Parte Critica"
         }
-    ]
+    ],
+    "parti_interne": {
+        "parte_bambino": {
+            "descrizione": "Rappresenta il bambino interno, ha bisogno di amore e sicurezza, teme di perdere l'amore e l'affetto che trova nelle relazioni, in particolare con la fidanzata Martina",
+            "interazione_con_altri": "Si sente spesso in conflitto tra la parte critica e la parte abbandono"
+        }
+    }
 }
