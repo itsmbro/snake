@@ -80,7 +80,8 @@
     ],
     "parti_interne": {
         "parte_bambino": {
-            "sbalzi_di_umore": "Passa dall'essere stra felice all'essere stra triste"
+            "sbalzi_di_umore": "Passa dall'essere stra felice all'essere stra triste",
+            "frustrazione_e_paura": "Manifesta spesso frustrazione e ha paura della Parte Critica"
         }
     }
 }
