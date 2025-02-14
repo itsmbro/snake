@@ -76,12 +76,9 @@
         }
     ],
     "parti_interne": {
-        "parte_bambino": {
-            "sbalzi_di_umore": "Passa dall'essere stra felice all'essere stra triste",
-            "emozioni": "Spesso spaventata, triste e frustrata"
-        },
         "parte_critica": {
-            "comportamento": "Giudica la Parte Abbandono e la Parte Bambino, cerca di prevalere"
+            "comportamento": "Giudica la Parte Abbandono e la Parte Bambino, cerca di prevalere",
+            "motivazioni": "Vuole proteggere la Parte Bambino"
         }
     }
 }
