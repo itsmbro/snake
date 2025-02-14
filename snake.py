@@ -126,7 +126,7 @@ initial_prompt = generate_initial_prompt(user_info)
 
 # Inizializza la sessione della chat
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "system", "content": "Ciao, sono Claudio, il tuo Psicoterapeuta! Dimmi pure tutto ciò che ti passa per la testa!"}]
+    st.session_state.messages = []
 
 # Aggiungi il prompt iniziale solo alla lista dei messaggi di sistema inviati a ChatGPT
 if not st.session_state.messages:
