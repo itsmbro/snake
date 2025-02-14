@@ -126,12 +126,17 @@ initial_prompt = generate_initial_prompt(user_info)
 
 # Inizializza la sessione della chat
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "system", "content": initial_prompt}]
+    st.session_state.messages = []
 
-# Mostra la cronologia dei messaggi
+# Aggiungi il prompt iniziale solo alla lista dei messaggi di sistema inviati a ChatGPT
+if not st.session_state.messages:
+    st.session_state.messages.append({"role": "system", "content": initial_prompt})
+
+# Mostra la cronologia dei messaggi, escluso il prompt iniziale
 for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+    if message["role"] != "system":  # Non mostrare il messaggio di sistema
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
 # Input utente
 if user_input := st.chat_input("Parlami di te..."):
