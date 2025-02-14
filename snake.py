@@ -125,8 +125,8 @@ user_info = load_user_info()
 initial_prompt = generate_initial_prompt(user_info)
 
 # Inizializza la sessione della chat
-if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "system", "content": initial_prompt}]
+#if "messages" not in st.session_state:
+    #st.session_state.messages = [{"role": "system", "content": initial_prompt}]
 
 # Mostra la cronologia dei messaggi
 for message in st.session_state.messages:
