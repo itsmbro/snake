@@ -62,20 +62,9 @@
     ],
     "ciclo_pensieri_negativi": "Si verifica quando la fidanzata non risponde per un periodo di tempo, portando a pensieri di rifiuto o abbandono",
     "reazioni_emozionali": "Desiderio di causare lo stesso dolore alla fidanzata non rispondendo o sottolineando i suoi errori",
-    "parti_interne_identificate": [
-        {
-            "nome": "Parte Bambino",
-            "descrizione": "Rappresenta il bambino interiore"
-        },
-        {
-            "nome": "Parte Critica",
-            "descrizione": "Rappresenta l'autocritica"
-        },
-        {
-            "nome": "Parte Abbandono",
-            "descrizione": "Rappresenta la parte più vulnerabile che ha paura di essere rifiutata o abbandonata"
-        }
-    ],
-    "dinamica_parti_interne": "La Parte Critica spesso giudica la Parte Abbandono, creando frustrazione",
-    "gestione_dinamica_parti_interne": "Lavorare sulla comprensione e l'accettazione di tutte le parti, riducendo la critica interna e la paura dell'abbandono"
+    "parti_identificate": {
+        "parte_bambino": "Rappresenta il bambino interiore",
+        "parte_critica": "Rappresenta l'autocritica e giudica spesso la 'parte abbandono', causando frustrazione",
+        "parte_abbandono": "Rappresenta la vulnerabilità e la paura di essere rifiutata o abbandonata, ha il compito di proteggere la 'parte bambino'"
+    }
 }
