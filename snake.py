@@ -102,8 +102,8 @@ def generate_initial_prompt(user_info):
         '  "chiave2": "valore2"\n'
         "}\n"
         "00000000\n\n"
-        "Il JSON deve essere ben formato e contenere solo nuove informazioni pertinenti.\n"
-        "Non modificare o rimuovere dati esistenti, ma solo aggiungere nuove informazioni se necessario.\n"
+        "Il JSON deve essere ben formato e contenere solo nuove informazioni pertinenti. se le nuove informazioni appartengono a chiavi già esistenti, preoccupati di fornire il valore aggiornato comprensivo anche del vecchio valore, magari in modo conciso, se no i valori verranno sovrascritti, e non aggiornai.\n"
+        "Non rimuovere dati esistenti, ma solo aggiungere nuove informazioni quando è necessario.\n"
         "Ora iniziamo a parlare!"
     )
 
