@@ -64,18 +64,27 @@
     "reazioni_emozionali": "Desiderio di causare lo stesso dolore alla fidanzata non rispondendo o sottolineando i suoi errori",
     "parti_identificate": [
         {
+            "nome_parte": "Parte Bambino",
+            "descrizione": "Il bambino interiore, cerca amore nelle altre persone, soprattutto nella fidanzata. Ha bisogno di acquisire più fiducia in Michele adulto",
+            "relazioni": "Ha bisogno di meno affetto da fonti esterne, poiché ha già l'affetto di Michele adulto"
+        },
+        {
             "nome_parte": "Parte Critica",
-            "descrizione aggiuntiva": "Cerca a volte di prevalere sulle altre parti"
+            "descrizione": "Rappresenta l'autocritica, tende a giudicare la Parte Abbandono, causando frustrazione"
+        },
+        {
+            "nome_parte": "Parte Abbandono",
+            "descrizione": "La parte più vulnerabile, ha paura di essere rifiutata o abbandonata. Protegge la Parte Bambino",
+            "relazioni": "Viene giudicata dalla Parte Critica"
         }
     ],
     "parti_interne": {
         "parte_bambino": {
             "sbalzi_di_umore": "Passa dall'essere stra felice all'essere stra triste",
-            "emozioni": [
-                "spaventata",
-                "triste",
-                "frustrata"
-            ]
+            "emozioni": "Spesso spaventata, triste e frustrata"
+        },
+        "parte_critica": {
+            "comportamento": "Giudica la Parte Abbandono e la Parte Bambino, cerca di prevalere"
         }
     }
 }
