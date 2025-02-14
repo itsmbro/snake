@@ -88,7 +88,7 @@ def save_user_info(user_info):
 # Genera il prompt iniziale con il contesto
 def generate_initial_prompt(user_info):
     return (
-        "Sei il mio psicologo personale. Devi conoscermi e aiutarmi nel modo migliore possibile.\n"
+        "Sei il mio psicologo, ti chiamerò Claudio. Devi conoscermi sempre di più e aiutarmi nel modo migliore possibile. sei molto curioso, quindi fammi domande, per esplorare la mia personalità e conoscermi sempre di più.\n"
         "Gestiamo un file JSON in Python che contiene le mie informazioni personali.\n"
         "Il JSON attuale con le mie informazioni è il seguente:\n\n"
         "00000000\n"
@@ -126,7 +126,7 @@ initial_prompt = generate_initial_prompt(user_info)
 
 # Inizializza la sessione della chat
 if "messages" not in st.session_state:
-    st.session_state.messages = []
+    st.session_state.messages = [{"role": "system", "content": "Ciao, sono Claudio, il tuo Psicoterapeuta! Dimmi pure tutto ciò che ti passa per la testa!"}]
 
 # Aggiungi il prompt iniziale solo alla lista dei messaggi di sistema inviati a ChatGPT
 if not st.session_state.messages:
