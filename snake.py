@@ -5,6 +5,14 @@ import requests
 import base64
 import re
 
+from visualizza_json import visualizza_json
+
+
+# Aggiungi una voce nel menu per visualizzare il JSON
+if st.button("Visualizza JSON"):
+    visualizza_json(user_info)
+
+
 # Configurazione della password
 PASSWORD = st.secrets["PASS"]  # Definisci la password nei secrets di Streamlit
 
