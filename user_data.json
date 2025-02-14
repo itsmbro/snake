@@ -81,7 +81,11 @@
     "parti_interne": {
         "parte_bambino": {
             "sbalzi_di_umore": "Passa dall'essere stra felice all'essere stra triste",
-            "emozioni": "Spesso spaventata e triste"
+            "emozioni": [
+                "spaventata",
+                "triste",
+                "frustrata"
+            ]
         }
     }
 }
