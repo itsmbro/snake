@@ -65,12 +65,12 @@
     "parti_identificate": [
         {
             "nome_parte": "Parte Bambino",
-            "descrizione": "Il bambino interiore, cerca amore nelle altre persone, soprattutto nella fidanzata. Si sente spesso frustrato e spaventato dalla Parte Critica",
+            "descrizione": "Il bambino interiore, cerca amore nelle altre persone, soprattutto nella fidanzata. Ha bisogno di acquisire più fiducia in Michele adulto",
             "relazioni": "Ha bisogno di meno affetto da fonti esterne, poiché ha già l'affetto di Michele adulto"
         },
         {
             "nome_parte": "Parte Critica",
-            "descrizione": "Rappresenta l'autocritica, tende a giudicare la Parte Abbandono, causando frustrazione. Vuole criticare la Parte Abbandono per essere troppo premurosa e soffocante per la Parte Bambino"
+            "descrizione": "Rappresenta l'autocritica, tende a giudicare la Parte Abbandono, causando frustrazione"
         },
         {
             "nome_parte": "Parte Abbandono",
@@ -80,7 +80,8 @@
     ],
     "parti_interne": {
         "parte_bambino": {
-            "sbalzi_di_umore": "Passa dall'essere stra felice all'essere stra triste"
+            "sbalzi_di_umore": "Passa dall'essere stra felice all'essere stra triste",
+            "emozioni": "Spesso spaventata e triste"
         }
     }
 }
