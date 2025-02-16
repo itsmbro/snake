@@ -11,7 +11,8 @@
     "note_psicologiche": [
         "un anno di psicoterapia lavoro sull'internal family system",
         "ansia da abbandono",
-        "fidanzato con martina"
+        "fidanzato con martina",
+        "tendenza alla paranoia nelle relazioni"
     ],
     "animale_domestico": {
         "tipo": "Cane",
@@ -26,14 +27,14 @@
         "Terapia cognitivo-comportamentale"
     ],
     "trattamento_corrente": "Terapia Cognitivo-Comportamentale",
-    "pensieri_ricorrenti": "Preoccupazioni riguardanti la fidanzata, che possa evitare o nascondere qualcosa",
+    "pensieri_ricorrenti": "Preoccupazioni riguardanti la fidanzata, che possa evitare o nascondere qualcosa. Tendenza a interpretare negativamente le azioni della fidanzata",
     "psicoterapeuta": "AI (che saresti tu, gpt)",
     "piano_terapeutico": {
         "obiettivi_terapia": [
             "Gestione dell'ansia riguardo la relazione con la fidanzata",
             "Preparazione al potenziale cambiamento di vita (convivenza con la fidanzata)",
             "Comprensione ed espressione efficace dell'emotività",
-            "Gestione dei pensieri ricorrenti",
+            "Gestione dei pensieri ricorrenti e delle tendenze paranoiche",
             "Gestione delle reazioni emotive",
             "Superare le paure di rifiuto e abbandono",
             "Gestione serena delle parti interne per evitare conflitti"
