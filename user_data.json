@@ -82,5 +82,12 @@
             "comportamento": "Giudica la Parte Abbandono e la Parte Bambino, cerca di prevalere",
             "motivazioni": "Vuole proteggere la Parte Bambino"
         }
+    },
+    "esperienze_passate": {
+        "prima_relazione": {
+            "durata": "quasi due anni",
+            "dinamiche": "La partner era critica, severa, e fredda, causando ansia e insicurezza",
+            "impatto": "Paura del conflitto, paura di non essere ricambiato, sensazione di essere sbagliato"
+        }
     }
 }
