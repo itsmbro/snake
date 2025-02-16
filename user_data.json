@@ -84,10 +84,10 @@
         }
     },
     "esperienze_passate": {
-        "prima_relazione": {
-            "durata": "quasi due anni",
-            "dinamiche": "La partner era critica, severa, e fredda, causando ansia e insicurezza",
-            "impatto": "Paura del conflitto, paura di non essere ricambiato, sensazione di essere sbagliato"
+        "relazione_precedente": {
+            "durata": "due anni",
+            "dinamiche": "La partner era critica e fredda, creando sentimenti di insicurezza e ansia. Michele spesso si sentiva sbagliato e non ricambiato",
+            "conseguenze": "Paura del conflitto, paura di essere sbagliato, insicurezza nelle relazioni"
         }
     }
 }
