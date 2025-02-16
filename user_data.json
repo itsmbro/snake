@@ -84,10 +84,12 @@
         }
     },
     "esperienze_passate": {
-        "relazione_precedente": {
-            "durata": "due anni",
-            "dinamiche": "La partner era critica e fredda, creando sentimenti di insicurezza e ansia. Michele spesso si sentiva sbagliato e non ricambiato",
-            "conseguenze": "Paura del conflitto, paura di essere sbagliato, insicurezza nelle relazioni"
+        "prima_relazione": {
+            "durata": "quasi due anni",
+            "dinamiche": "La partner era critica, severa, e fredda, causando ansia e insicurezza",
+            "impatto": "Paura del conflitto, paura di non essere ricambiato, sensazione di essere sbagliato"
         }
-    }
+    },
+    "esperienze_traumatiche": "Prima relazione durata due anni con una partner che era fredda, giudicante e spesso spariva dopo le litigate, lasciando Michele a sentirsi sbagliato e perso.",
+    "memoria_ricordo": "La memoria ricordo della precedente relazione dolorosa sta influenzando il modo in cui Michele vive la sua relazione attuale, portandolo a temere il rifiuto e a sentirsi non amato."
 }
