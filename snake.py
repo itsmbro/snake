@@ -9,7 +9,15 @@ from visualizza_json import visualizza_json
 
 
 # Aggiungi una voce nel menu per visualizzare il JSON
+import pyttsx3
 
+# Funzione per la lettura vocale
+def leggi_vocale(testo):
+    engine = pyttsx3.init()
+    engine.setProperty('rate', 150)  # Velocità della voce
+    engine.setProperty('volume', 1)  # Volume della voce
+    engine.say(testo)
+    engine.runAndWait
 
 
 # Configurazione della password
@@ -168,6 +176,7 @@ if user_input := st.chat_input("Parlami di te..."):
         # Mostra la risposta nella chat
         with st.chat_message("assistant"):
             st.markdown(updated_response)
+            leggi_vocale(updated_response)
 
         # Salva il messaggio nella sessione
         st.session_state.messages.append({"role": "assistant", "content": updated_response})
