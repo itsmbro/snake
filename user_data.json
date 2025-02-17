@@ -24,7 +24,8 @@
     "strategie_gestione_ansia": [
         "Comunicazione aperta con la partner",
         "Tecniche di rilassamento",
-        "Terapia cognitivo-comportamentale"
+        "Terapia cognitivo-comportamentale",
+        "Distinguere tra realtà e pensieri ansiosi"
     ],
     "trattamento_corrente": "Terapia Cognitivo-Comportamentale",
     "pensieri_ricorrenti": "Preoccupazioni riguardanti la fidanzata, che possa evitare o nascondere qualcosa. Tendenza a interpretare negativamente le azioni della fidanzata",
@@ -40,7 +41,7 @@
             "Gestione serena delle parti interne per evitare conflitti"
         ]
     },
-    "pensieri_correnti": "Preoccupazione che la ragazza possa evitare o rifiutare, soprattutto quando non possono incontrarsi di persona",
+    "pensieri_correnti": "Preoccupazione che la ragazza possa evitare o rifiutare, soprattutto quando non possono incontrarsi di persona. Riconosce la distorsione tra la realtà e i pensieri ansiosi",
     "emozioni_correnti": [
         "frustrazione",
         "rabbia",
@@ -54,7 +55,8 @@
     ],
     "obiettivi_terapia_aggiuntivi": [
         "Gestione delle reazioni emotive",
-        "Superare le paure di rifiuto e abbandono"
+        "Superare le paure di rifiuto e abbandono",
+        "Distinguere tra realtà e pensieri ansiosi"
     ],
     "strategie_terapeutiche_aggiuntive": [
         "Sviluppo di competenze di comunicazione assertiva"
@@ -73,7 +75,7 @@
         },
         {
             "nome_parte": "Parte Abbandono",
-            "descrizione": "La parte più vulnerabile, ha paura di essere rifiutata o abbandonata. Protegge la Parte Bambino",
+            "descrizione": "La parte più vulnerabile, ha paura di essere rifiutata o abbandonata. Protegge la Parte Bambino, crea distorsioni tra la realtà e i pensieri ansiosi",
             "relazioni": "Viene giudicata dalla Parte Critica"
         }
     ],
