@@ -12,7 +12,9 @@
         "un anno di psicoterapia lavoro sull'internal family system",
         "ansia da abbandono",
         "fidanzato con martina",
-        "tendenza alla paranoia nelle relazioni"
+        "tendenza alla paranoia nelle relazioni",
+        "recenti sentimenti di ingiustizia sul tempo libero tra lui e la fidanzata",
+        "recente episodio di paranoia riguardo alla fidanzata che non risponde ai messaggi"
     ],
     "animale_domestico": {
         "tipo": "Cane",
@@ -20,7 +22,7 @@
     },
     "emotivo": true,
     "potenziale_cambiamento_vita": "Valutazione di andare a convivere con la fidanzata, ora con meno preoccupazione",
-    "preoccupazioni_correnti": "Ansia riguardo la relazione con la fidanzata",
+    "preoccupazioni_correnti": "Ansia riguardo la relazione con la fidanzata, sentimenti di ingiustizia sul tempo libero, dubbi sul comportamento della fidanzata",
     "strategie_gestione_ansia": [
         "Comunicazione aperta con la partner",
         "Tecniche di rilassamento",
@@ -28,7 +30,7 @@
         "Distinguere tra realtà e pensieri ansiosi"
     ],
     "trattamento_corrente": "Terapia Cognitivo-Comportamentale",
-    "pensieri_ricorrenti": "Preoccupazioni riguardanti la fidanzata, che possa evitare o nascondere qualcosa. Tendenza a interpretare negativamente le azioni della fidanzata",
+    "pensieri_ricorrenti": "Preoccupazioni riguardanti la fidanzata, che possa evitare o nascondere qualcosa. Tendenza a interpretare negativamente le azioni della fidanzata, recente episodio di paranoia riguardo alla fidanzata che non risponde ai messaggi",
     "psicoterapeuta": "AI (che saresti tu, gpt)",
     "piano_terapeutico": {
         "obiettivi_terapia": [
@@ -41,13 +43,14 @@
             "Gestione serena delle parti interne per evitare conflitti"
         ]
     },
-    "pensieri_correnti": "Preoccupazione che la ragazza possa evitare o rifiutare, soprattutto quando non possono incontrarsi di persona. Riconosce la distorsione tra la realtà e i pensieri ansiosi",
+    "pensieri_correnti": "Preoccupazione che la ragazza possa evitare o rifiutare, soprattutto quando non possono incontrarsi di persona. Riconosce la distorsione tra la realtà e i pensieri ansiosi, recente episodio di paranoia riguardo alla fidanzata che non risponde ai messaggi",
     "emozioni_correnti": [
         "frustrazione",
         "rabbia",
         "paura",
         "timore",
-        "senso di abbandono"
+        "senso di abbandono",
+        "ingiustizia"
     ],
     "comportamenti_reattivi": [
         "Ritiro emotivo",
@@ -57,7 +60,9 @@
         "Lavoro su autostima e sicurezza in se stesso",
         "Gestione delle reazioni emotive",
         "Superare le paure di rifiuto e abbandono",
-        "Distinguere tra realtà e pensieri ansiosi"
+        "Distinguere tra realtà e pensieri ansiosi",
+        "Gestione della percezione di ingiustizia",
+        "Gestione della paranoia"
     ],
     "strategie_terapeutiche_aggiuntive": [
         "Sviluppo di competenze di comunicazione assertiva",
