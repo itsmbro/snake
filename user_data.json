@@ -112,5 +112,11 @@
     "comportamento_isolante": "Evita di uscire con gli amici per paura che la fidanzata vada a letto prima che lui torni a casa",
     "rassicurazione_fidanzata": "Ha bisogno costante di rassicurazioni da parte della fidanzata",
     "equilibrio_esigenze": "Lotta per equilibrare le sue esigenze con il desiderio di mantenere la relazione",
-    "ripetizione_comportamenti_passati": "Sta riproponendo comportamenti dalla sua precedente relazione in quella attuale"
+    "ripetizione_comportamenti_passati": "Sta riproponendo comportamenti dalla sua precedente relazione in quella attuale",
+    "sentimenti_correnti": "Stress, ansia, sensazione di essere in una relazione tossica",
+    "riflessioni_sulla_relazione": "Pensa che la relazione con la fidanzata possa essere tossica e che possa avergli causato dei problemi emotivi",
+    "strategie_gestione_ansia_aggiuntive": [
+        "Valutazione della relazione",
+        "Comunicazione aperta con la fidanzata riguardo ai suoi sentimenti"
+    ]
 }
